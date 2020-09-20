@@ -129,7 +129,7 @@ sigma_walk_state_forecast <- cov_matrix(length(mu_state_prior), (0.017)^2, 0.9)
 
 
 
-out <- stan("MyPolls.stan", 
+out <- stan("Polls.stan", 
             data = list(N = nrow(PollData),  #Number of Polls
                         #Get totals for important values
                         S = max(PollData$state_index),   
