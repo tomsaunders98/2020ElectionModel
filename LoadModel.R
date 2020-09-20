@@ -117,8 +117,8 @@ PriorData <- PriorData %>%
 mu_state_prior <- PriorData %>%
   pull(Beta_prior)
 
-sigma_mu_state_end <-cov_matrix(n = length(mu_state_prior), sigma2 = 0.18, rho = 0.9)
-sigma_walk_state_forecast <- cov_matrix(length(mu_state_prior), (0.017)^2, 0.9)
+sigma_mu_state_end <-cov_matrix(n = length(mu_state_prior), sigma2 = 0.05, rho = 0.5)
+sigma_walk_state_forecast <- cov_matrix(length(mu_state_prior), (0.057)^2, 0.75)
 
 
 
