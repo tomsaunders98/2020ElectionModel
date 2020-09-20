@@ -4,7 +4,12 @@ An implementation of [Drew Linzer's dynamic Bayesian election forecasting model]
 
 This is an attempt at a strict implementation of Linzer's paper, with Multivariate Normals adapted from the code from Pierre Kremp's [version](http://www.slate.com/features/pkremp_forecast/report.html) of the model.
 
-You can view the model [here](https://tomjs.org/projects/2020/).
+You can view the model [here](https://tomjs.org/Forecast2020/index.html).
+
+The visualisation code can be viewed [here](https://github.com/tomsaunders98/tomsaunders98.github.io/tree/master/Forecast2020).
+
+I've written more in detail about the reason for building this model and the issues with it in a blog post [here](https://tomjs.org/post/electionforecast/)
+
 
 ### Files
 
@@ -21,6 +26,3 @@ You can view the model [here](https://tomjs.org/projects/2020/).
 
 ## Share Your Thoughts
 I'm on twitter at [@tomjs](https://twitter.com/tomjs). If you have any questions/suggestions please let me know!
-
-
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />

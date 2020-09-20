@@ -374,23 +374,23 @@ summary {
 <div id="how-polls-are-interpreted" class="section level3">
 <h3>How polls are interpreted</h3>
 <p>For each poll, the number of respondents declaring that they will vote for Joe Biden (<span class="math inline">\(y_k\)</span>) is drawn from a binomial distribution where <span class="math inline">\(i[k]\)</span> and <span class="math inline">\(j[k]\)</span> indicate the state, <span class="math inline">\(i\)</span>, and day, <span class="math inline">\(j\)</span>, of poll <span class="math inline">\(k\)</span> and <span class="math inline">\(n_k\)</span> denotes the total number of respondents who indicate a preference for one of the two major parties:</p>
-<p><span class="math display">\[y_k \sim Binomial(\pi_{i[k]j[k]}, n_k)\]</span></p>
+<p><span class="math display">\[\small y_k \sim Binomial(\pi_{i[k]j[k]}, n_k)\]</span></p>
 <p>As this is a direct implementation of Linzer’s model it only takes into account state polls of “Likely Voters” and ignores national polls as well as polls of “Registered Voters”. It also does not take into account house effects or other sources of survey error like other, more advanced, models do.</p>
 </div>
 <div id="how-latent-voter-intention-is-estimated" class="section level3">
 <h3>How latent voter intention is estimated</h3>
 <p>The daily trends in all states latent voter intention <span class="math inline">\(\pi_{ij}\)</span> are estimated simultaneously as a function of two components: a state-level component, <span class="math inline">\(\beta_{ij}\)</span>, and a national-level component, <span class="math inline">\(\delta_j\)</span>, that detect systematic departures from <span class="math inline">\(\beta_{ij}\)</span> due to events that affect all states, such as convention bounces. Both components are placed on the logit scale:</p>
-<p><span class="math display">\[\pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j) \]</span></p>
+<p><span class="math display">\[\small \pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j) \]</span></p>
 </div>
 <div id="how-the-forecast-is-made" class="section level3">
 <h3>How the forecast is made</h3>
 <p>On election day (<span class="math inline">\(\delta_j\)</span>) is fixed at 0 and (<span class="math inline">\(\beta_{ij}\)</span>) is defined as a Normal distribution around the structural forecast <span class="math inline">\(h_i\)</span>. The covariance matrix (a slight departure from Linzer’s initial paper) is set at variance of 0.18 and covariance of 0.162. This ensures that state scores are correlated with each other, since it is highly unlikely that Biden will perform better in Texas than Virginia, something an independent prior would not take into account.</p>
-<p><span class="math display">\[\beta_{iJ} \sim Multivariate Normal(logit(h_i), \Sigma_{end})\]</span></p>
+<p><span class="math display">\[\small \beta_{iJ} \sim Multivariate Normal(logit(h_i), \Sigma_{end})\]</span></p>
 <p>When predicting the election result weeks or months in advance, there will inevitably be a gap in the polling data. In order to bridge this gap, as well as smoothing voter intention on days no polls are conducted, both the state and national level component use a Bayesian reverse random-walk prior which begins on election day.</p>
 <p>Each day’s estimation of <span class="math inline">\(\beta_{ij}\)</span> is given prior distribution:</p>
-<p><span class="math display">\[\beta_{ij}|\beta_{ij+1} \sim MultivariateNormal(\beta_{ij+1}, \Sigma_{walk})\]</span></p>
+<p><span class="math display">\[\small \beta_{ij}|\beta_{ij+1} \sim MultivariateNormal(\beta_{ij+1}, \Sigma_{walk})\]</span></p>
 <p>Similarly, <span class="math inline">\(\delta_j\)</span> is given a prior distribution:</p>
-<p><span class="math display">\[\delta_j|\delta_{j+1} \sim MultivariateNormal(\delta_{j+1}, \Sigma_{walk})\]</span></p>
+<p><span class="math display">\[\small \delta_j|\delta_{j+1} \sim MultivariateNormal(\delta_{j+1}, \Sigma_{walk})\]</span></p>
 <p>The variance is also give as <span class="math inline">\(\Sigma_{walk}\)</span> with variance = <span class="math inline">\(0.017^2\)</span> and covariance = 0.0002601.</p>
 </div>
 <div id="what-the-forecast-is-doing" class="section level3">

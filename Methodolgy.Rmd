@@ -17,7 +17,7 @@ The model uses the [Fair model](https://fairmodel.econ.yale.edu/RAYFAIR/PDF/2007
 
 For each poll, the number of respondents declaring that they will vote for Joe Biden ($y_k$) is drawn from a binomial distribution where $i[k]$ and $j[k]$ indicate the state, $i$, and day, $j$, of poll $k$ and $n_k$ denotes the total number of respondents who indicate a preference for one of the two major parties:
 
-$$y_k \sim Binomial(\pi_{i[k]j[k]}, n_k)$$
+$$\small y_k \sim Binomial(\pi_{i[k]j[k]}, n_k)$$
 
 As this is a direct implementation of Linzer’s model it only takes into account  state polls of “Likely Voters” and ignores national polls as well as polls of “Registered Voters”. It also does not take into account house effects or other sources of survey error like other, more advanced, models do. 
 
@@ -25,24 +25,24 @@ As this is a direct implementation of Linzer’s model it only takes into accoun
 
 The daily trends in all states latent voter intention $\pi_{ij}$ are estimated simultaneously as a function of two components: a state-level component, $\beta_{ij}$, and a national-level component, $\delta_j$, that detect systematic departures from $\beta_{ij}$ due to events that affect all states, such as convention bounces. Both components are placed on the logit scale:
 
-$$\pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j) $$
+$$\small \pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j) $$
 
 
 ### How the forecast is made
 
 On election day ($\delta_j$) is fixed at 0 and ($\beta_{ij}$) is defined as a Normal distribution around the structural forecast $h_i$. The covariance matrix (a slight departure from Linzer’s initial paper) is set at variance of 0.18 and covariance of 0.162. This ensures that state scores are correlated with each other, since it is highly unlikely that Biden will perform better in Texas than Virginia, something an independent prior would not take into account. 
 
-$$\beta_{iJ} \sim Multivariate Normal(logit(h_i), \Sigma_{end})$$
+$$\small \beta_{iJ} \sim Multivariate Normal(logit(h_i), \Sigma_{end})$$
 
 When predicting the election result weeks or months in advance, there will inevitably be a gap in the polling data. In order to bridge this gap, as well as smoothing voter intention on days no polls are conducted, both the state and national level component use a Bayesian reverse random-walk prior which begins on election day.
 
 Each day’s estimation of $\beta_{ij}$ is given prior distribution:
 
-$$\beta_{ij}|\beta_{ij+1} \sim MultivariateNormal(\beta_{ij+1}, \Sigma_{walk})$$
+$$\small \beta_{ij}|\beta_{ij+1} \sim MultivariateNormal(\beta_{ij+1}, \Sigma_{walk})$$
 
 Similarly, $\delta_j$ is given a prior distribution:
 
-$$\delta_j|\delta_{j+1} \sim MultivariateNormal(\delta_{j+1}, \Sigma_{walk})$$
+$$\small \delta_j|\delta_{j+1} \sim MultivariateNormal(\delta_{j+1}, \Sigma_{walk})$$
 
 The variance is also give as $\Sigma_{walk}$ with variance = $0.017^2$ and covariance = 0.0002601.
 
