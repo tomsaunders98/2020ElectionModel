@@ -18,3 +18,9 @@ You can view the model [here](https://tomjs.org/projects/2020/).
   * Actual model
 * /output
   * output data from LoadModel.R (for visualisation with d3js)
+
+## Share Your Thoughts
+I'm on twitter at [@tomjs](https://twitter.com/tomjs). If you have any questions/suggestions please let me know!
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
