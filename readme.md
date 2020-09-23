@@ -2,7 +2,7 @@
 
 An implementation of [Drew Linzer's dynamic Bayesian election forecasting model](https://votamatic.org/wp-content/uploads/2013/07/Linzer-JASA13.pdf).
 
-This is an attempt at a strict implementation of Linzer's paper, with Multivariate Normals adapted from the code from Pierre Kremp's [version](http://www.slate.com/features/pkremp_forecast/report.html) of the model.
+This is an attempt at a strict implementation of Linzer's paper, with Multivariate Normals adapted from the code from Pierre Kremp's [version](http://www.slate.com/features/pkremp_forecast/report.html) of the model. The model runs every three days on a simple Bash script and the output is uploaded here in /output. 
 
 You can view the model [here](https://tomjs.org/Forecast2020/index.html).
 
