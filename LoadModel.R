@@ -228,11 +228,20 @@ FinalResults <- merge(nopolls, PredictedResults, all=TRUE)
 # wrange poll data for each state
 Poll <- PollData %>%
   mutate(
-    vote = dem /(dem + gop)
+    vote = dem/(dem+gop)
   ) %>%
   select(state, date, vote) %>%
   arrange(state) %>%
   pivot_wider(names_from = state, values_from = vote, values_fn = {mean})
+
+# Adding Raw Poll Data for bullet points
+PollR <- PollData %>%
+  mutate(
+    avg = dem-gop
+  ) %>%
+  select(state, date, avg) %>%
+  arrange(state) %>%
+  pivot_wider(names_from = state, values_from = avg, values_fn = {mean})
 
 # build csv files for each state including polls, CIs and avg vote share
 for (state in factor(states_w_polls)){
@@ -263,9 +272,19 @@ for (state in factor(states_w_polls)){
       date = as.character(date)
     ) %>%
     arrange(date)
+  RawPolls <- PollR %>%
+    select("date", state) %>%
+    rename(
+      "PollDiff" = state
+    ) %>%
+    mutate(
+      date = as.character(date)
+    ) %>%
+    arrange(date)
   CIs <- merge(CILeft, CIRight, by="date")
   statefile <- merge(CIs, Pred, by="date", all.x=TRUE)
-  statewpolls <- merge(statefile, Pollv, by="date", all.x=TRUE)
+  statewpollsD <- merge(statefile, Pollv, by="date", all.x=TRUE)
+  statewpolls <- merge(statewpollsD, RawPolls, by="date", all.x=TRUE)
   filename = paste("output//states//", state,".csv", sep="")
   write.csv(statewpolls, filename, row.names=FALSE)
   
