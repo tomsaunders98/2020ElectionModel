@@ -58,7 +58,7 @@ PollData <- PollData %>%
   subset(state != "--" &
          as.Date(start.date, format="%m/%d/%Y", origin = lubridate::origin) > StartDate &
          type == "lv" &
-         TRUE. == TRUE) %>%
+         include == TRUE) %>%
   mutate(
     start = as.Date(start.date, format="%m/%d/%y"),
     end = as.Date(end.date, format="%m/%d/%y", origin = lubridate::origin),
