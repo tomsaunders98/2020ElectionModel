@@ -57,11 +57,13 @@ PollData <- PollData %>%
   ) %>%
   subset(state != "--" &
          as.Date(start.date, format="%m/%d/%Y", origin = lubridate::origin) > StartDate &
-         type == "lv" &
-         include == TRUE) %>%
+         type == "lv") %>%
   mutate(
     start = as.Date(start.date, format="%m/%d/%y"),
-    end = as.Date(end.date, format="%m/%d/%y", origin = lubridate::origin),
+    end = as.Date(end.date, format="%m/%d/%y", origin = lubridate::origin)) %>%
+  subset((!is.na(start)) & #Get Rid of badly inputed data
+          (!is.na(end))) %>%
+  mutate(
     n_dem = round(pop * dem/100),
     n_respondents = round(pop*(dem+gop)/100),
     date = end - (1 + as.numeric(end-start)) %/% 2,
